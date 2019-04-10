@@ -79,10 +79,11 @@ void adiciona(){
     (*qtd)++;
 
     pBUFFER = realloc(pBUFFER, (sizeof(int)*4) + (sizeof(aluno)*(*qtd)));
-    paluno = (aluno*)j +1; //mudança
-    paluno+= (*qtd -1); // mudança
     if (pBUFFER == NULL) printf("\nNULL\n");
     reapontar();
+    paluno = (aluno*)j +1; //mudança
+    paluno+= (*qtd -1); // mudança
+
 
 
     printf("Nome: ");
