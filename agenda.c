@@ -42,8 +42,6 @@ int main()
 /*void remover(){
     printf("Digite o nome de quem deseja remover: ");
     scanf("")
-
-
 }
 */
 
@@ -51,9 +49,9 @@ void reapontar(){
 
     p = (int*)pBUFFER;
 
-    qtd = (int*) p+1;
-    i = (int*) qtd+1;
-    j = (int*) i+1;
+    qtd =  p+1;
+    i =  qtd+1;
+    j =  i+1;
     paluno = (aluno*)j+1;
 
 
@@ -76,24 +74,19 @@ void listar(){
 
 void adiciona(){
 
-    printf("Digite a quantidade: ");
-    scanf("%d", j);
 
-    *qtd += *j;
+    (*qtd)++;
 
     pBUFFER = realloc(pBUFFER, 4*sizeof(int) + (*qtd) * sizeof(aluno));
     if (pBUFFER == NULL) printf("\nNULL\n");
     reapontar();
 
-    for(*i=0;*i<*j;(*i)++){
+    printf("Nome: ");
+    scanf("%s", paluno->nome);
+    printf("Idade: ");
+    scanf("%d", &paluno->idade);
+    printf("Matricula: ");
+    scanf("%d", &paluno->matricula);
 
-        printf("Nome: ");
-        scanf("%s", paluno->nome);
-        printf("Idade: ");
-        scanf("%d", &paluno->idade);
-        printf("Matricula: ");
-        scanf("%d", &paluno->matricula);
-        paluno++;
-    }
 
 }
