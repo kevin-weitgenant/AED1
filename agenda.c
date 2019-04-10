@@ -58,9 +58,9 @@ void reapontar(){
 
 void listar(){
     reapontar();
-    
-    
-    
+
+
+
     for(*i=0;*i<*qtd; (*i)++){
         printf("Nome: %s\n", paluno->nome);
         printf("Idade: %d\n",paluno->idade);
@@ -77,9 +77,10 @@ void adiciona(){
 
 
     (*qtd)++;
+    
+    pBUFFER = realloc(pBUFFER, (sizeof(int)*4) + (sizeof(aluno)*(*qtd)));
     paluno = (aluno*)j +1; //mudança
     paluno+= (*qtd -1); // mudança
-    pBUFFER = realloc(pBUFFER, (sizeof(int)*4) + (sizeof(aluno)*(*qtd)));
     if (pBUFFER == NULL) printf("\nNULL\n");
     reapontar();
     paluno += (*qtd -1); // linha que tirei sem querer mas que tanto faz o erro acontece antes
