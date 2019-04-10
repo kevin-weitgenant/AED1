@@ -77,7 +77,7 @@ void adiciona(){
 
     (*qtd)++;
 
-    pBUFFER = realloc(pBUFFER, 4*sizeof(int) + (*qtd) * sizeof(aluno));
+    pBUFFER = realloc(pBUFFER, (sizeof(int)*4) + (sizeof(aluno)*(*qtd)));
     if (pBUFFER == NULL) printf("\nNULL\n");
     reapontar();
 
