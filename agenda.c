@@ -52,14 +52,15 @@ void reapontar(){
     qtd =  p+1;
     i =  qtd+1;
     j =  i+1;
-    if (*qtd > 0)paluno = (aluno*)j+1; //mudei
 
 
 }
 
 void listar(){
     reapontar();
-
+    
+    
+    
     for(*i=0;*i<*qtd; (*i)++){
         printf("Nome: %s\n", paluno->nome);
         printf("Idade: %d\n",paluno->idade);
@@ -76,7 +77,8 @@ void adiciona(){
 
 
     (*qtd)++;
-
+    paluno = (aluno*)j +1; //mudança
+    paluno+= (*qtd -1); // mudança
     pBUFFER = realloc(pBUFFER, (sizeof(int)*4) + (sizeof(aluno)*(*qtd)));
     if (pBUFFER == NULL) printf("\nNULL\n");
     reapontar();
