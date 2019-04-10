@@ -52,7 +52,7 @@ void reapontar(){
     qtd =  p+1;
     i =  qtd+1;
     j =  i+1;
-    paluno = (aluno*)j+1;
+    if (*qtd > 0)paluno = (aluno*)j+1; //mudei
 
 
 }
