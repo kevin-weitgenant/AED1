@@ -80,6 +80,7 @@ void adiciona(){
     pBUFFER = realloc(pBUFFER, (sizeof(int)*4) + (sizeof(aluno)*(*qtd)));
     if (pBUFFER == NULL) printf("\nNULL\n");
     reapontar();
+    paluno += (*qtd -1); // linha que tirei sem querer mas que tanto faz o erro acontece antes
 
     printf("Nome: ");
     scanf("%s", paluno->nome);
