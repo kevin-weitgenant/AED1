@@ -29,8 +29,9 @@ void adiciona(){
     pBUFFER = realloc(pBUFFER, (sizeof(int)*4) + (sizeof(aluno)*(*qtd)));
     if (pBUFFER == NULL) printf("\nNULL\n");
     reapontar();
-    paluno = (aluno*)j +1; //mudança
-    paluno+= (*qtd -1); // mudança
+    paluno = (aluno*)j +sizeof(aluno);
+    paluno= paluno+ (sizeof(aluno)*(*qtd -1));
+
 
 
 
@@ -46,14 +47,14 @@ void adiciona(){
 
 void listar(){
 
-    paluno = (aluno*)j +1;
 
+    paluno = (aluno*)j +sizeof(aluno);
 
     for(*i=0;*i<*qtd; (*i)++){
         printf("Nome: %s\n", paluno->nome);
         printf("Idade: %d\n",paluno->idade);
         printf("Matricula: %d\n",paluno->matricula);
-        paluno++;
+        paluno+=sizeof(aluno);
     }
 
 
@@ -88,12 +89,3 @@ int main()
     }
     return 0;
 }
-
-
-
-
-
-
-
-
-
