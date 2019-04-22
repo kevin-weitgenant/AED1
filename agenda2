@@ -1,0 +1,146 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+
+typedef struct{
+    char nome[20];
+    int idade;
+    int matricula;
+}aluno;
+
+int *p,*qtd,*i,*j;
+char *frase;
+void *pBUFFER;
+aluno *paluno;
+
+
+void reapontar(){
+
+    p = (int*)pBUFFER;
+
+    qtd =  p+1;
+    i =  qtd+1;
+    j =  i+1;
+    frase = (char*) j +1;
+
+}
+
+void adiciona(){
+
+
+    (*qtd)++;
+
+    pBUFFER = realloc(pBUFFER, (sizeof(int)*4) + (sizeof(aluno)*(*qtd)));
+    if (pBUFFER == NULL) printf("\nNULL\n");
+    reapontar();
+    paluno = frase + 1;
+    paluno= paluno+ (sizeof(aluno)*(*qtd -1));
+
+
+
+
+    printf("Nome: ");
+    scanf("%s", paluno->nome);
+    printf("Idade: ");
+    scanf("%d", &paluno->idade);
+    printf("Matricula: ");
+    scanf("%d", &paluno->matricula);
+
+
+}
+
+void listar(){
+
+
+    paluno = frase+1;
+
+    for(*i=0;*i<*qtd; (*i)++){
+        printf("Nome: %s\n", (paluno->nome));
+        printf("Idade: %d\n",paluno->idade);
+        printf("Matricula: %d\n",paluno->matricula);
+        paluno+=sizeof(aluno);
+    }
+
+
+}
+
+
+void buscar(){
+
+    paluno = frase+1;
+
+    if (*p == 1){
+        for(*i = 0; *i<*qtd; (*i)++){
+            paluno = (aluno*)paluno + (*i);
+            printf("paluno->nome = %s\n\n\n", (paluno->nome));
+            if (strcmp((paluno->nome),frase) == 0){
+                printf("Nome: %s\n", paluno->nome);
+                printf("Idade: %d\n",paluno->idade);
+                printf("Matricula: %d\n\n\n",paluno->matricula);
+            }
+            paluno = frase +1;
+        }
+
+    }
+
+
+
+
+}
+
+
+int main()
+{
+    pBUFFER = malloc(sizeof(int)*4   + 20*sizeof(char) );
+    reapontar();
+    *qtd = 0;
+    *p = 6;
+
+    while (*p != 5){
+        printf("Digite\n(1) Adicionar\n(2) Listar\n(3) Buscar\n(4) Deletar\n(5) Sair\n");
+        scanf("%d", p);
+        getchar(); // nao sei se é necessario
+        if (*p == 1){
+            adiciona();
+        }
+
+        else if (*p == 2){
+            listar();
+
+        }
+
+        else if (*p == 3){
+            while (*p != 4){
+                printf("Escolha como deseja buscar\n(1) Nome\n(2) Idade\n(3) Matricula\n(4) Voltar para o menu\n");
+                scanf("%d", p);
+                if (*p == 1){
+                    printf("Digite o nome a ser procurado: ");
+                    scanf("%s", frase);
+                    buscar();
+                }
+                else if (*p ==2){
+                    printf("Digite a idade a ser buscada: ");
+                    scanf("%s", frase);
+                    buscar();
+                }
+                else if (*p ==3){
+                    printf("Digite a matricula a ser procurada: ");
+                    scanf("%s", frase);
+                    buscar();
+
+                }
+                else  printf("Invalido... Tente novamente\n\n");
+
+
+
+            }
+
+        }
+
+
+
+
+    }
+    return 0;
+}
