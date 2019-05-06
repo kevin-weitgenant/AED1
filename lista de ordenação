@@ -48,7 +48,7 @@ void imprime(int ** vetor, int tamanho){
 }
 
 
-
+//
 void decrescente (int **vetor, int tamanho){
     //Escreva um algoritmo que ordene de maneira descrescente (do maior para o menor).
 
