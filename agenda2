@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 typedef struct{
     char nome[20];
     int idade;
@@ -23,6 +22,7 @@ void reapontar(){
     i =  qtd+1;
     j =  i+1;
     frase = (char*) j +1;
+    paluno = frase;
 
 }
 
@@ -31,10 +31,10 @@ void adiciona(){
 
     (*qtd)++;
 
-    pBUFFER = realloc(pBUFFER, (sizeof(int)*4) + (sizeof(aluno)*(*qtd)));
+    pBUFFER = realloc(pBUFFER, (sizeof(int)*4) + sizeof(char)*20+ sizeof(aluno)*(*qtd));
     if (pBUFFER == NULL) printf("\nNULL\n");
     reapontar();
-    paluno = frase + 1;
+    paluno = sizeof(char)*19 + paluno;
     paluno= paluno+ (sizeof(aluno)*(*qtd -1));
 
 
@@ -52,8 +52,8 @@ void adiciona(){
 
 void listar(){
 
-
-    paluno = frase+1;
+    reapontar();
+    paluno = sizeof(char)*19 + paluno;
 
     for(*i=0;*i<*qtd; (*i)++){
         printf("Nome: %s\n", (paluno->nome));
@@ -68,18 +68,19 @@ void listar(){
 
 void buscar(){
 
-    paluno = frase+1;
 
     if (*p == 1){
         for(*i = 0; *i<*qtd; (*i)++){
-            paluno = (aluno*)paluno + (*i);
-            printf("paluno->nome = %s\n\n\n", (paluno->nome));
+            reapontar();
+            paluno = sizeof(char)*19 + paluno;
+            paluno = paluno + (*i) * sizeof(aluno);
+            printf("*i = %d paluno->nome = %s\n\n\n", *i,(paluno->nome));
             if (strcmp((paluno->nome),frase) == 0){
                 printf("Nome: %s\n", paluno->nome);
                 printf("Idade: %d\n",paluno->idade);
                 printf("Matricula: %d\n\n\n",paluno->matricula);
             }
-            paluno = frase +1;
+
         }
 
     }
@@ -144,3 +145,4 @@ int main()
     }
     return 0;
 }
+
