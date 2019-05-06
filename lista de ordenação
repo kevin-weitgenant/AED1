@@ -1,0 +1,123 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+void procura (int **vetor, int tamanho, int numero){
+//Escreva um algoritmo que procure por um dado numero em vetor ordenado.
+
+
+int i;
+
+for (i=0; i< tamanho; i++){
+    if (  *(*vetor + i) == numero)printf("encontrado na posicao %d\n", i);
+
+
+}
+
+
+}
+
+
+void decrescente (int **vetor, int tamanho);
+
+void adiciona_no_vetor(int ** vetor, int tamanho, int numero){
+/*Escreva um algoritmo que receba um vetor ordenado e um numero extra e insira esse ´
+numero na sua posic¸ ´ ao correta no vetor ordenado, deslocando os outros n ˜ umeros se ´
+necessario.*/
+
+// vou considerar ordenado na forma decrescente
+
+realloc(*vetor, tamanho * sizeof(int));
+*(*vetor + (tamanho-1)) = numero;
+decrescente(vetor, tamanho);
+
+
+
+
+}
+
+
+void imprime(int ** vetor, int tamanho){
+    for(int i = 0; i< tamanho; i++){
+        printf("posicao %d %d\n", i ,*(*vetor + i));
+
+
+    }
+
+
+}
+
+
+
+void decrescente (int **vetor, int tamanho){
+    //Escreva um algoritmo que ordene de maneira descrescente (do maior para o menor).
+
+
+    int i,j,temp;
+
+    for (i=0; i<tamanho; i++){
+        for(j=i+1; j<tamanho; j++){
+            if (  *(*vetor +i)  < *(*vetor +j) ){
+                temp = *(*vetor + i);
+                *(*vetor +i) = *(*vetor + j);
+                *(*vetor +j) = temp;
+            }
+        }
+
+
+    }
+
+
+
+}
+
+
+
+
+int main()
+{
+    int tamanho, *vetor, i,j, count = 0;
+
+    printf("Digite o tamanho do vetor:\n");
+    scanf("%d", &tamanho);
+    vetor = (int*)malloc(sizeof(int) * tamanho);
+
+
+    for (i=0; i< tamanho; i++){
+        printf("digite a posicao %d  ", i);
+        scanf("%d", &vetor[i]);
+    }
+
+
+    for (i=0; i< (tamanho-1); i++){
+        for (j = i+1; j<tamanho; j++){
+            if (vetor[i] > vetor[j]) count++;
+        }
+    }
+
+
+    if (count == 0)printf("\nORDENADO\n");
+    decrescente(&vetor, tamanho);
+    printf("decrescente...\n");
+    imprime(&vetor, tamanho);
+
+    printf("digite um numero a adicionar no vetor");
+    tamanho++;
+    scanf("%d", &i);
+    adiciona_no_vetor(&vetor,tamanho,i);
+    imprime(&vetor,tamanho);
+
+    printf("digite o numero que deseja procurar\n");
+    scanf("%d", &i);
+
+    procura(&vetor, tamanho, i);
+
+
+
+
+
+
+}
+
+
+
