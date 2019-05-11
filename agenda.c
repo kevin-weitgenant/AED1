@@ -31,24 +31,24 @@ void adiciona(){
 
     (*qtd)++;
 
-    pBUFFER = realloc(pBUFFER, (sizeof(int)*5) + (sizeof(char)*20) + (sizeof(char)*(*qtdC)) + (sizeof(aluno)*(*qtd)));
+    pBUFFER = realloc(pBUFFER, (sizeof(int)*5) + (sizeof(char)*40) + (sizeof(char)*(*qtdC)) + (sizeof(aluno)*(*qtd)));
     if (pBUFFER == NULL) printf("\nNULL\n");
     reapontar();
-    frase = paluno + sizeof(aluno) * (*qtd -1) + sizeof(char) * (*qtdC)  ;
-
+    frase = paluno;
+    frase = frase + (sizeof(aluno) * (*qtd -1) + sizeof(char) * (*qtdC));
 
     printf("Nome: ");
     scanf("%s", frase);
-    paluno = frase + (strlen(frase)+1);
+    paluno = frase + (sizeof(char)* (strlen(frase)+1))    ;
     printf("Idade: ");
     scanf("%d", &paluno->idade);
     printf("Matricula: ");
     scanf("%d", &paluno->matricula);
 
     *qtdC = *qtdC + (strlen(frase) +1);
-    pBUFFER = realloc(pBUFFER, (sizeof(int)*5) + sizeof(char)*(*qtdC)+ sizeof(aluno)*(*qtd));
-
-
+    pBUFFER = realloc(pBUFFER, (sizeof(int)*5) + sizeof(char)*(*qtdC)+ sizeof(char)*20+ sizeof(aluno)*(*qtd));
+    if (pBUFFER == NULL) printf("\nNULL\n");
+    reapontar();
 
 }
 
@@ -63,7 +63,8 @@ void listar(){
         printf("Nome: %s\n",frase);
         printf("Idade: %d\n",paluno->idade);
         printf("Matricula: %d\n",paluno->matricula);
-        frase= paluno + sizeof(aluno);
+        frase = paluno;
+        frase = frase + sizeof(aluno);
     }
 
 
@@ -71,8 +72,6 @@ void listar(){
 
 /*
 void buscar(){
-
-
     if (*p == 1){
         for(*i = 0; *i<*qtd; (*i)++){
             reapontar();
@@ -84,14 +83,8 @@ void buscar(){
                 printf("Idade: %d\n",paluno->idade);
                 printf("Matricula: %d\n\n\n",paluno->matricula);
             }
-
         }
-
     }
-
-
-
-
 }
 */
 
@@ -115,6 +108,8 @@ int main()
             listar();
 
         }
+    }
+    return 0;}
 
         /*else if (*p == 3){
             while (*p != 4){
@@ -134,20 +129,10 @@ int main()
                     printf("Digite a matricula a ser procurada: ");
                     scanf("%s", frase);
                     buscar();
-
-
                 else  printf("Invalido... Tente novamente\n\n");
-
-
-
             }
-
         }
-
-
-
-
     }
-    */
+
     return 0;
-}}
+}*/
