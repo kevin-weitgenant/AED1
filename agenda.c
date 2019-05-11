@@ -1,12 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
 typedef struct{
-    char nome[20];
     int idade;
     int matricula;
 }aluno;
 
-int *p,*qtd,*i,*j;
+int *p,*qtd,*qtdC,*i,*j;
+char *frase;
 void *pBUFFER;
 aluno *paluno;
 
@@ -16,8 +18,11 @@ void reapontar(){
     p = (int*)pBUFFER;
 
     qtd =  p+1;
-    i =  qtd+1;
+    qtdC = qtd+1;
+    i =  qtdC+1;
     j =  i+1;
+    frase = (char*) j +1;
+    paluno = frase + (sizeof(char)*20);
 
 }
 
@@ -26,49 +31,76 @@ void adiciona(){
 
     (*qtd)++;
 
-    pBUFFER = realloc(pBUFFER, (sizeof(int)*4) + (sizeof(aluno)*(*qtd)));
+    pBUFFER = realloc(pBUFFER, (sizeof(int)*5) + (sizeof(char)*20) + (sizeof(char)*(*qtdC)) + (sizeof(aluno)*(*qtd)));
     if (pBUFFER == NULL) printf("\nNULL\n");
     reapontar();
-    paluno = j + 1;
-    paluno= paluno+ (sizeof(aluno)*(*qtd -1));
-
-
+    frase = paluno + sizeof(aluno) * (*qtd -1) + sizeof(char) * (*qtdC)  ;
 
 
     printf("Nome: ");
-    scanf("%s", paluno->nome);
+    scanf("%s", frase);
+    paluno = frase + (strlen(frase)+1);
     printf("Idade: ");
     scanf("%d", &paluno->idade);
     printf("Matricula: ");
     scanf("%d", &paluno->matricula);
+
+    *qtdC = *qtdC + (strlen(frase) +1);
+    pBUFFER = realloc(pBUFFER, (sizeof(int)*5) + sizeof(char)*(*qtdC)+ sizeof(aluno)*(*qtd));
+
 
 
 }
 
 void listar(){
 
-
-    paluno = j+1;
+    reapontar();
+    frase = paluno;
 
     for(*i=0;*i<*qtd; (*i)++){
-        printf("Nome: %s\n", paluno->nome);
+
+        paluno = frase + (sizeof(char)*(strlen(frase)+1));
+        printf("Nome: %s\n",frase);
         printf("Idade: %d\n",paluno->idade);
         printf("Matricula: %d\n",paluno->matricula);
-        paluno+=sizeof(aluno);
+        frase= paluno + sizeof(aluno);
     }
 
 
 }
 
+/*
+void buscar(){
+
+
+    if (*p == 1){
+        for(*i = 0; *i<*qtd; (*i)++){
+            reapontar();
+            paluno = sizeof(char)*20 + paluno;
+            paluno = paluno + (*i) * sizeof(aluno);
+            printf("*i = %d paluno->nome = %s\n\n\n", *i,(paluno->nome));
+            if (strcmp((paluno->nome),frase) == 0){
+                printf("Nome: %s\n", paluno->nome);
+                printf("Idade: %d\n",paluno->idade);
+                printf("Matricula: %d\n\n\n",paluno->matricula);
+            }
+
+        }
+
+    }
 
 
 
+
+}
+*/
 
 int main()
 {
-    pBUFFER = malloc(sizeof(int)*4);
+    pBUFFER = malloc(sizeof(int)*5   + 20*sizeof(char) );
     reapontar();
     *qtd = 0;
+    *qtdC = 0;
     *p = 6;
 
     while (*p != 5){
@@ -82,10 +114,40 @@ int main()
         else if (*p == 2){
             listar();
 
+        }
+
+        /*else if (*p == 3){
+            while (*p != 4){
+                printf("Escolha como deseja buscar\n(1) Nome\n(2) Idade\n(3) Matricula\n(4) Voltar para o menu\n");
+                scanf("%d", p);
+                if (*p == 1){
+                    printf("Digite o nome a ser procurado: ");
+                    scanf("%s", frase);
+                    buscar();
+                }
+                else if (*p ==2){
+                    printf("Digite a idade a ser buscada: ");
+                    scanf("%s", frase);
+                    buscar();
+                }
+                else if (*p ==3){
+                    printf("Digite a matricula a ser procurada: ");
+                    scanf("%s", frase);
+                    buscar();
+
+
+                else  printf("Invalido... Tente novamente\n\n");
+
+
+
+            }
 
         }
 
 
+
+
     }
+    */
     return 0;
-}
+}}
