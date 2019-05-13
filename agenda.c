@@ -22,7 +22,7 @@ void reapontar(){
     i =  qtdC+1;
     j =  i+1;
     frase = (char*) j +1;
-    paluno = frase + (sizeof(char)*20);
+    paluno = (aluno*)(frase + 20);
 
 }
 
@@ -34,12 +34,12 @@ void adiciona(){
     pBUFFER = realloc(pBUFFER, (sizeof(int)*5) + (sizeof(char)*40) + (sizeof(char)*(*qtdC)) + (sizeof(aluno)*(*qtd)));
     if (pBUFFER == NULL) printf("\nNULL\n");
     reapontar();
-    frase = paluno;
+    frase = (char*)paluno;
     frase = frase + (sizeof(aluno) * (*qtd -1) + sizeof(char) * (*qtdC));
 
     printf("Nome: ");
     scanf("%s", frase);
-    paluno = frase + (sizeof(char)* (strlen(frase)+1))    ;
+    paluno = (aluno*)(frase + (sizeof(char)* (strlen(frase)+1)))    ;
     printf("Idade: ");
     scanf("%d", &paluno->idade);
     printf("Matricula: ");
@@ -55,16 +55,15 @@ void adiciona(){
 void listar(){
 
     reapontar();
-    frase = paluno;
+    frase = (char*)paluno;
 
     for(*i=0;*i<*qtd; (*i)++){
 
-        paluno = frase + (sizeof(char)*(strlen(frase)+1));
+        paluno = (aluno*)(frase + (sizeof(char)*(strlen(frase)+1)));
         printf("Nome: %s\n",frase);
         printf("Idade: %d\n",paluno->idade);
         printf("Matricula: %d\n",paluno->matricula);
-        frase = paluno;
-        frase = frase + sizeof(aluno);
+        frase = (char*) (paluno +1);
     }
 
 
@@ -133,6 +132,5 @@ int main()
             }
         }
     }
-
     return 0;
 }*/
